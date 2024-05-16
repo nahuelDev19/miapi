@@ -6,4 +6,5 @@ import com.api.rest.miapi.entitys.User;
 
 public interface UserRepository extends JpaRepository<User,Long>{
 
+    boolean existsByUsername(String name);
 }

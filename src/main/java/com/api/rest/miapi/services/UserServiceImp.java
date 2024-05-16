@@ -50,4 +50,9 @@ public class UserServiceImp implements UserService{
         return repo.save(user);
     }
 
+    @Override
+    public boolean existsByUsername(String name) {
+        return repo.existsByUsername(name);
+    }
+
 }

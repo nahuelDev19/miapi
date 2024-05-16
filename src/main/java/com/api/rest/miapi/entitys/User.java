@@ -2,6 +2,7 @@ package com.api.rest.miapi.entitys;
 
 import java.util.List;
 
+import com.api.rest.miapi.validaciones.ExistFinByName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -30,6 +31,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ExistFinByName
     @Column(unique = true)
     @NotBlank
     private String username;
