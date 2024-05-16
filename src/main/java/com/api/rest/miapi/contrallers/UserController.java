@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.rest.miapi.entitys.User;
@@ -40,6 +39,17 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody User user, BindingResult binding){
+        if(binding.hasFieldErrors()){
+            return validation(binding);
+        }
+        user.setAdmin(false);
+        return save(user,binding);
+    }
+
+    
 
     public ResponseEntity<?> validation(BindingResult result){
         Map<String, String> error= new HashMap<>();
