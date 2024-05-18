@@ -16,6 +16,8 @@ public class ExistFinByNameImpl implements ConstraintValidator<ExistFinByName,St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        
+        //usamos esta verificacion para que no se lance un error si service da null
         if (uService==null) {
             return true;
         }
