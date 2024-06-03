@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,5 +36,9 @@ public class UserApi {
     inverseJoinColumns = @JoinColumn(name= "role_id"),
     uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})} )
     private List<Role> roles;
+
+    @Transient
+    private boolean admin;
+
 
 }
