@@ -10,6 +10,6 @@ import com.api.rest.miapi.entitys.UserApi;
 
 public interface UserRepository extends JpaRepository<UserApi,Long>{
 
-    Optional<UserApi> findByUsername(String username);
+    boolean findByUsername(String username);
 
 }
