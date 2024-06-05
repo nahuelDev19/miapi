@@ -64,8 +64,15 @@ public class UserApiImp implements UserService{
         return repository.save(userApi);
     }
 
+    @Override
+    public boolean existsByUsername(String name) {
+        Boolean exists = repository.existsByUsername(name);
+        return Boolean.TRUE.equals(exists);
+    }
+
     
 
+    
 
 
 

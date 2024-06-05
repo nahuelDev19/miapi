@@ -9,5 +9,6 @@ public interface UserService {
 
     List<UserApi> findAll();
     UserApi save(UserApi userApi);
+    boolean existsByUsername(String name);
 
 }

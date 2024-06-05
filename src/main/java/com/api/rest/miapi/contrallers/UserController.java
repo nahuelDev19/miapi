@@ -37,6 +37,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userApi));
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody UserApi userApi, BindingResult binding ){
+        userApi.setAdmin(false);
+        return create(userApi, binding);
+    }
+
 
 
 

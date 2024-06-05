@@ -2,6 +2,7 @@ package com.api.rest.miapi.securitys;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +22,9 @@ public class SpringSecurityConfig {
     @Bean
     SecurityFilterChain security(HttpSecurity http)throws Exception{
         return http.authorizeHttpRequests( (authz) -> authz
-        .requestMatchers("/users").permitAll()
+        .requestMatchers(HttpMethod.GET,"/users").permitAll()
+        .requestMatchers(HttpMethod.POST,"/users/register").permitAll()
+
         .anyRequest().authenticated())
         .csrf(con-> con.disable())
         .sessionManagement(manag -> manag.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
