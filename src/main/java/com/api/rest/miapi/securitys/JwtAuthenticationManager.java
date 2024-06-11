@@ -50,13 +50,10 @@ public class JwtAuthenticationManager extends UsernamePasswordAuthenticationFilt
                     username= userApi.getUsername();
                     password= userApi.getPassword();
                 } catch (StreamReadException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (DatabindException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
@@ -69,18 +66,22 @@ public class JwtAuthenticationManager extends UsernamePasswordAuthenticationFilt
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
 
-                UserApi userApi= (UserApi)authResult.getPrincipal();
+                org.springframework.security.core.userdetails.User userApi= (org.springframework.security.core.userdetails.User) authResult.getPrincipal();
                 String username= userApi.getUsername();
 
                 Collection<? extends GrantedAuthority> roles= authResult.getAuthorities();
-                Claims claims= Jwts.claims().build();
-                claims.put("Authorities", roles);
+                
+                Claims claims= Jwts.claims()
+                .add("rol",roles)
+                .add("username", username)
+                .build();
+                
 
 
                 String token= Jwts.builder()
                 .subject(username)
                 .claim("claims", claims)
-                .signWith(key)
+                .signWith(SECRET_KEY)
                 .expiration(new Date(System.currentTimeMillis()+36000000))
                 .issuedAt(new Date())
                 .compact();

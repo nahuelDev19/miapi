@@ -42,7 +42,7 @@ public class JpaUserDetailsService implements UserDetailsService{
         true,
         true,
         true,
-        false,
+        true,
          authorities);
     }
 
